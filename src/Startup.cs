@@ -21,6 +21,7 @@ namespace RaspberryPresenceStatus
         {
             services.AddSingleton<IDisplayService, DisplayService>();
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RaspberryPresenceStatus", Version = "v1" });
@@ -41,6 +42,8 @@ namespace RaspberryPresenceStatus
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
