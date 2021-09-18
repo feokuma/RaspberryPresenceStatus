@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RaspberryPresenceStatus.Models;
+using RaspberryPresenceStatus.Services;
 
 namespace RaspberryPresenceStatus.Controllers
 {
@@ -11,14 +11,18 @@ namespace RaspberryPresenceStatus.Controllers
     public class StatusLedController
     {
         public ILogger<StatusLedController> Logger { get; private set; }
-        public StatusLedController(ILogger<StatusLedController> logger)
+        public IDisplayService DisplayService { get; }
+
+        public StatusLedController(ILogger<StatusLedController> logger, IDisplayService displayService)
         {
             Logger = logger;
+            DisplayService = displayService;
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] StatusLed statusLed)
+        [HttpPut]
+        public async Task<ActionResult> Put(byte[] statusLed)
         {
+            DisplayService.DrawBytes(statusLed);
             return await Task.FromResult(new NoContentResult());
         }
     }
