@@ -20,9 +20,9 @@ namespace RaspberryPresenceStatus.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(byte[] statusLed)
+        public async Task<ActionResult> Put()
         {
-            DisplayService.DrawBytes(statusLed);
+            DisplayService.DrawAvaliable();
             return await Task.FromResult(new NoContentResult());
         }
     }

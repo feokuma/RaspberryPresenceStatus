@@ -5,9 +5,9 @@ namespace RaspberryPresenceStatus.Models
     public class PresenceEntity
     {
         [JsonPropertyName("@odata.context")]
-        public string DataContext { get; set; }
-        public string Id { get; set; }
-        public string Availability { get; set; }
-        public string Activity { get; set; }
+        public string DataContext { get; set; } = default!;
+        public string Id { get; set; } = default!;
+        public string Availability { get; set; } = default!;
+        public string Activity { get; set; } = default!;
     }
 }

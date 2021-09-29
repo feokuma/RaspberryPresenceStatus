@@ -14,7 +14,9 @@ namespace RaspberryPresenceStatus
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseUrls("http://192.168.12.90:5000")
+                        .UseStartup<Startup>();
                 });
     }
 }

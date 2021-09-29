@@ -43,7 +43,11 @@ namespace RaspberryPresenceStatus
 
             app.UseAuthorization();
 
-            app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(options => options
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+            );
 
             app.UseEndpoints(endpoints =>
             {

@@ -6,5 +6,7 @@ namespace RaspberryPresenceStatus.Services
     {
         void SetStatus(PresenceStatusEnum presenceStatus);
         void DrawBytes(byte[] data);
+
+        void DrawAvaliable();
     }
 }

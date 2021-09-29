@@ -24,13 +24,6 @@ namespace RaspberryPresenceStatus.Services
             _ledDisplay = new Ws2812b(_spiDevice, 8, 8);
         }
 
-        public void Dispose() => _spiDevice.Dispose();
-
-        public void SetImage(BitmapImage bitmapImage)
-        {
-
-        }
-
         public void SetStatus(PresenceStatusEnum presenceStatus)
         {
             switch (presenceStatus)
@@ -50,8 +43,8 @@ namespace RaspberryPresenceStatus.Services
                 var mask = 0x80;
                 for (int column = 0; column < 8; column++)
                 {
-                    if ((data[line] & mask) == 1)
-                        leds.SetPixel(line, column, Color.FromArgb(0, 10, 0));
+                    if ((data[line] & mask) != 0)
+                        leds.SetPixel(line, column, Color.FromArgb(10, 10, 0));
                     else
                         leds.SetPixel(line, column, Color.FromArgb(0, 0, 0));
                     mask >>= 1;
@@ -61,10 +54,25 @@ namespace RaspberryPresenceStatus.Services
             _ledDisplay.Update();
         }
 
-        private void DrawAvaliable()
+        public void DrawAvaliable()
         {
             byte[] avaliable = { 0x3c, 0x7e, 0xfb, 0xf7, 0xaf, 0xdf, 0x7e, 0x3c };
             DrawBytes(avaliable);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_spiDevice != null)
+                    _spiDevice.Dispose();
+            }
         }
     }
 }
