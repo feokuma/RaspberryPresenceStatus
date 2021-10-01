@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaspberryPresenceStatus", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C0B581E1-D16D-4CED-A9A6-84FEE713921A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaspberryPresenceStatus.UnitTests", "test\RaspberryPresenceStatus.UnitTests\RaspberryPresenceStatus.UnitTests.csproj", "{7B8B91F2-B16D-40C0-9601-CF9A912C448B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaspberryPresenceStatus.Unit", "test\RaspberryPresenceStatus.Unit\RaspberryPresenceStatus.Unit.csproj", "{7B8B91F2-B16D-40C0-9601-CF9A912C448B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaspberryPresenceStatus.Integration", "test\RaspberryPresenceStatus.Integration\RaspberryPresenceStatus.Integration.csproj", "{D0A83B22-9CB6-407C-8E87-1C23B0466377}"
 EndProject

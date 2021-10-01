@@ -21,30 +21,21 @@ namespace RaspberryPresenceStatus.Services
         public DisplayService()
         {
             _spiDevice = SpiDevice.Create(spiSettings);
-            _ledDisplay = new Ws2812b(_spiDevice, 8, 8);
-        }
-
-        public void SetStatus(PresenceStatusEnum presenceStatus)
-        {
-            switch (presenceStatus)
-            {
-                case PresenceStatusEnum.Avaliable:
-                    DrawAvaliable();
-                    break;
-            }
+            _ledDisplay = new Ws2812b(_spiDevice, 3, 4);
         }
 
         public void DrawBytes(byte[] data)
         {
+            Clear();
             BitmapImage leds = _ledDisplay.Image;
 
-            for (int line = 0; line < 8; line++)
+            for (int line = 0; line < 4; line++)
             {
                 var mask = 0x80;
-                for (int column = 0; column < 8; column++)
+                for (int column = 0; column < 3; column++)
                 {
                     if ((data[line] & mask) != 0)
-                        leds.SetPixel(line, column, Color.FromArgb(10, 10, 0));
+                        leds.SetPixel(line, column, Color.FromArgb(0, 10, 0));
                     else
                         leds.SetPixel(line, column, Color.FromArgb(0, 0, 0));
                     mask >>= 1;
@@ -54,10 +45,35 @@ namespace RaspberryPresenceStatus.Services
             _ledDisplay.Update();
         }
 
-        public void DrawAvaliable()
+        public void Clear()
         {
-            byte[] avaliable = { 0x3c, 0x7e, 0xfb, 0xf7, 0xaf, 0xdf, 0x7e, 0x3c };
-            DrawBytes(avaliable);
+            _ledDisplay.Image.Clear();
+            _ledDisplay.Update();
+        }
+
+        public void DrawStatus(PresenceStatusEnum presenceStatusEnum)
+        {
+            byte[] statusImageBytes = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+            switch (presenceStatusEnum)
+            {
+                case PresenceStatusEnum.Avaliable:
+                    statusImageBytes = new byte[] { 0x3c, 0x7e, 0xfb, 0xf7, 0xaf, 0xdf, 0x7e, 0x3c };
+                    break;
+                case PresenceStatusEnum.Away:
+                    statusImageBytes = new byte[] { 0x3c, 0x6e, 0xef, 0xef, 0xef, 0xf7, 0x7e, 0x3c };
+                    break;
+                case PresenceStatusEnum.Busy:
+                    statusImageBytes = new byte[] { 0x3c, 0x7e, 0xff, 0x81, 0x81, 0xff, 0x7e, 0x3c };
+                    break;
+                case PresenceStatusEnum.DoNotDisturb:
+                    statusImageBytes = new byte[] { 0x3c, 0x7e, 0xff, 0x81, 0x81, 0xff, 0x7e, 0x3c };
+                    break;
+                case PresenceStatusEnum.Offline:
+                    break;
+            }
+
+            DrawBytes(statusImageBytes);
         }
 
         public void Dispose()
