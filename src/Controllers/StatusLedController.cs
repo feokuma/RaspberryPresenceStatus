@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RaspberryPresenceStatus.Models.Enuns;
 using RaspberryPresenceStatus.Services;
 
 namespace RaspberryPresenceStatus.Controllers
@@ -20,9 +21,10 @@ namespace RaspberryPresenceStatus.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put()
+        [Route("/status")]
+        public async Task<ActionResult> Put(PresenceStatusEnum presenceStatusEnum)
         {
-            DisplayService.DrawAvaliable();
+            DisplayService.DrawStatus(presenceStatusEnum);
             return await Task.FromResult(new NoContentResult());
         }
     }
