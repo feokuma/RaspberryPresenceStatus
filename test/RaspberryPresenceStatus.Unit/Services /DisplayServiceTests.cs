@@ -1,6 +1,7 @@
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
+using RaspberryPresenceStatus.Models.Enuns;
 using RaspberryPresenceStatus.Services;
 
 namespace RaspberryPresenceStatus.Unit
@@ -10,9 +11,10 @@ namespace RaspberryPresenceStatus.Unit
         [Test]
         public void TestName()
         {
+            var status = PresenceStatusEnum.Avaliable;
             var displayService = new DisplayService();
 
-            displayService.DrawAvaliable();
+            displayService.DrawStatus(status);
         }
     }
 }

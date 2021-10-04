@@ -26,7 +26,6 @@ namespace RaspberryPresenceStatus.Services
 
         public void DrawBytes(byte[] data)
         {
-            Clear();
             BitmapImage leds = _ledDisplay.Image;
 
             for (int line = 0; line < 4; line++)
