@@ -15,29 +15,36 @@ namespace RaspberryPresenceStatus.Services
             Mode = SpiMode.Mode0,
             DataBitLength = 8
         };
+
+        public int Lines { get; private set; }
+        public int Columns { get; private set; }
+
         private readonly SpiDevice _spiDevice;
         private readonly Ws2812b _ledDisplay;
 
         public DisplayService()
         {
+            Lines = 8;
+            Columns = 8;
             _spiDevice = SpiDevice.Create(spiSettings);
-            _ledDisplay = new Ws2812b(_spiDevice, 3, 4);
+            _ledDisplay = new Ws2812b(_spiDevice, Columns, Lines);
         }
 
         public void DrawBytes(byte[] data)
         {
+            var bytesPerLed = 3;
+            var ledsPerLine = 8;
             BitmapImage leds = _ledDisplay.Image;
 
-            for (int line = 0; line < 4; line++)
+            for (int line = 0; line < Lines; line++)
             {
-                var mask = 0x80;
-                for (int column = 0; column < 3; column++)
+                var offset = (bytesPerLed * ledsPerLine) * line;
+                for (int column = 0; column < Columns; column++)
                 {
-                    if ((data[line] & mask) != 0)
-                        leds.SetPixel(line, column, Color.FromArgb(0, 10, 0));
-                    else
-                        leds.SetPixel(line, column, Color.FromArgb(0, 0, 0));
-                    mask >>= 1;
+                    var r = data[offset++];
+                    var g = data[offset++];
+                    var b = data[offset++];
+                    leds.SetPixel(column, line, Color.FromArgb(r, g, b));
                 }
             }
 
