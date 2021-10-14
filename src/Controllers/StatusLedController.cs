@@ -15,24 +15,28 @@ namespace RaspberryPresenceStatus.Controllers
     {
         public ILogger<StatusLedController> Logger { get; private set; }
         public IDisplayService DisplayService { get; }
+        public IMicrosoftTeamsStatusImages MicrosoftTeamsStatusImages { get; }
 
-        public StatusLedController(ILogger<StatusLedController> logger, IDisplayService displayService)
+        public StatusLedController(ILogger<StatusLedController> logger, IDisplayService displayService, IMicrosoftTeamsStatusImages microsoftTeamsStatusImages)
         {
             Logger = logger;
             DisplayService = displayService;
+            MicrosoftTeamsStatusImages = microsoftTeamsStatusImages;
         }
 
         [HttpPut]
         [Route("/status")]
-        public async Task<ActionResult> Put(PresenceStatusEnum presenceStatusEnum)
+        public ActionResult DrawPresenceStatus(PresenceStatusEnum presenceStatusEnum)
         {
-            DisplayService.DrawStatus(presenceStatusEnum);
-            return await Task.FromResult(new NoContentResult());
+            var imageBytes = MicrosoftTeamsStatusImages.StatusImageFromEnum(presenceStatusEnum);
+            DisplayService.DrawBytes(imageBytes);
+
+            return new NoContentResult();
         }
 
         [HttpPut]
         [Route("/drawbytes")]
-        public ActionResult Put(ImageBytesPayload image)
+        public ActionResult DrawBytes(ImageBytesPayload image)
         {
             if (image.ImageBytes is not null)
             {

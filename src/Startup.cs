@@ -21,6 +21,7 @@ namespace RaspberryPresenceStatus
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDisplayService, DisplayService>();
+            services.AddSingleton<IMicrosoftTeamsStatusImages, MicrosoftTeamsStatusImages>();
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
