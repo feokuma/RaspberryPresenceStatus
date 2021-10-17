@@ -38,8 +38,6 @@ namespace RaspberryPresenceStatus
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RaspberryPresenceStatus v1"));
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
