@@ -3,7 +3,6 @@ using System.Device.Spi;
 using System.Drawing;
 using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
-using RaspberryPresenceStatus.Models.Enuns;
 
 namespace RaspberryPresenceStatus.Services
 {
@@ -38,7 +37,7 @@ namespace RaspberryPresenceStatus.Services
 
             for (int line = 0; line < Lines; line++)
             {
-                var offset = (bytesPerLed * ledsPerLine) * line;
+                var offset = bytesPerLed * ledsPerLine * line;
                 for (int column = 0; column < Columns; column++)
                 {
                     var r = data[offset++];
@@ -55,31 +54,6 @@ namespace RaspberryPresenceStatus.Services
         {
             _ledDisplay.Image.Clear();
             _ledDisplay.Update();
-        }
-
-        public void DrawStatus(PresenceStatusEnum presenceStatusEnum)
-        {
-            byte[] statusImageBytes = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
-
-            switch (presenceStatusEnum)
-            {
-                case PresenceStatusEnum.Avaliable:
-                    statusImageBytes = new byte[] { 0x3c, 0x7e, 0xfb, 0xf7, 0xaf, 0xdf, 0x7e, 0x3c };
-                    break;
-                case PresenceStatusEnum.Away:
-                    statusImageBytes = new byte[] { 0x3c, 0x6e, 0xef, 0xef, 0xef, 0xf7, 0x7e, 0x3c };
-                    break;
-                case PresenceStatusEnum.Busy:
-                    statusImageBytes = new byte[] { 0x3c, 0x7e, 0xff, 0x81, 0x81, 0xff, 0x7e, 0x3c };
-                    break;
-                case PresenceStatusEnum.DoNotDisturb:
-                    statusImageBytes = new byte[] { 0x3c, 0x7e, 0xff, 0x81, 0x81, 0xff, 0x7e, 0x3c };
-                    break;
-                case PresenceStatusEnum.Offline:
-                    break;
-            }
-
-            DrawBytes(statusImageBytes);
         }
 
         public void Dispose()

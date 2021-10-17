@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RaspberryPresenceStatus.Models;
@@ -15,13 +14,11 @@ namespace RaspberryPresenceStatus.Controllers
     {
         public ILogger<StatusLedController> Logger { get; private set; }
         public IDisplayService DisplayService { get; }
-        public IMicrosoftTeamsStatusImages MicrosoftTeamsStatusImages { get; }
 
-        public StatusLedController(ILogger<StatusLedController> logger, IDisplayService displayService, IMicrosoftTeamsStatusImages microsoftTeamsStatusImages)
+        public StatusLedController(ILogger<StatusLedController> logger, IDisplayService displayService)
         {
             Logger = logger;
             DisplayService = displayService;
-            MicrosoftTeamsStatusImages = microsoftTeamsStatusImages;
         }
 
         [HttpPut]
