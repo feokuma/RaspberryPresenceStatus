@@ -1,28 +1,33 @@
 using System.Collections.Generic;
+using System.Drawing;
+using RaspberryPresenceStatus.Extensions;
 using RaspberryPresenceStatus.Models.Enuns;
 
 namespace RaspberryPresenceStatus.Models
 {
     public class MicrosoftTeamsStatusImages
     {
-        public const int WIDTH = 8;
-        public const int HEIGTH = 8;
-        public const int BYTES_PER_COMPONENT = 3;
+        private const int WIDTH = 8;
+        private const int HEIGTH = 8;
+        private const int BYTES_PER_COMPONENT = 3;
 
+        private static readonly Color AVALIABLE_COLOR = Color.FromArgb(0x00, 0x10, 0x00);
+        private static readonly Color BUSY_COLOR = Color.FromArgb(0x10, 0x00, 0x00);
+        private static readonly Color AWAY_COLOR = Color.FromArgb(0x10, 0x10, 0x00);
 
         public static byte[] StatusImageFromEnum(PresenceStatusEnum statusEnum)
         {
             return statusEnum switch
             {
-                PresenceStatusEnum.Avaliable => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xfb, 0xf7, 0xaf, 0xdf, 0x7e, 0x3c }),
-                PresenceStatusEnum.Away => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x6e, 0xef, 0xef, 0xef, 0xf7, 0x7e, 0x3c }),
-                PresenceStatusEnum.Busy => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xff, 0xff, 0xff, 0xff, 0x7e, 0x3c }),
-                PresenceStatusEnum.DoNotDisturb => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xff, 0x81, 0x81, 0xff, 0x7e, 0x3c }),
-                _ => ConvertBytesToBitmapImageRPi(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }),
+                PresenceStatusEnum.Avaliable => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xfb, 0xf7, 0xaf, 0xdf, 0x7e, 0x3c }, AVALIABLE_COLOR),
+                PresenceStatusEnum.Away => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x6e, 0xef, 0xef, 0xef, 0xf7, 0x7e, 0x3c }, AWAY_COLOR),
+                PresenceStatusEnum.Busy => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xff, 0xff, 0xff, 0xff, 0x7e, 0x3c }, BUSY_COLOR),
+                PresenceStatusEnum.DoNotDisturb => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xff, 0x81, 0x81, 0xff, 0x7e, 0x3c }, BUSY_COLOR),
+                _ => ConvertBytesToBitmapImageRPi(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, Color.Black),
             };
         }
 
-        private static byte[] ConvertBytesToBitmapImageRPi(byte[] pixelsBytes)
+        private static byte[] ConvertBytesToBitmapImageRPi(byte[] pixelsBytes, Color color)
         {
             var imageBytes = new List<byte>();
 
@@ -33,9 +38,9 @@ namespace RaspberryPresenceStatus.Models
                 {
                     var ledStatus = pixelsBytes[y] & mask;
                     if (ledStatus > 0)
-                        imageBytes.AddRange(new byte[] { 0x00, 0x01, 0x00 });
+                        imageBytes.AddRange(color.ToRgbBytes());
                     else
-                        imageBytes.AddRange(new byte[] { 0x00, 0x00, 0x00 });
+                        imageBytes.AddRange(Color.Black.ToRgbBytes());
 
                     mask >>= 1;
                 }
