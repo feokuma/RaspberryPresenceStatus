@@ -16,6 +16,10 @@ A led matrix display for online presence status. This is very usefull indicate w
 
 ## References
 
+-   [Setting up your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/getting-started.html#setting-up-your-raspberry-pi)
+-   [Deploy .NET apps to Raspberry Pi](https://docs.microsoft.com/en-us/dotnet/iot/deployment)
+-   [Raspberry PI passwordless SSH Access](https://www.raspberrypi.com/documentation/computers/remote-access.html#passwordless-ssh-access)
+-   [Remote Debugging on Linux ARM](https://github.com/OmniSharp/omnisharp-vscode/wiki/Remote-Debugging-On-Linux-Arm)
 -   [WS2812 Driver Sample](https://github.com/dotnet/iot/tree/main/src/devices/Ws28xx)
 
 ## Diagram
