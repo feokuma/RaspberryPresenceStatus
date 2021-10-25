@@ -1,19 +1,26 @@
 # Raspberry Presence Status
 
-A led matrix display for online presence status
+A led matrix display for online presence status. This is very usefull indicate when you are on a meeting.
 
 ## Technologies
 
--   Aspnet Core 5
--   NUnit
+-   .Net 5
+-   Raspberry Pi 3
 
 ## Libraries and tools
 
 -   [.Net Core IoT Libraries](https://github.com/dotnet/iot)
+-   NUnit
 
 ## References
 
 -   [WS2812 Driver Sample](https://github.com/dotnet/iot/tree/main/src/devices/Ws28xx)
+
+## Diagram
+
+This is the schematic to connect the boards
+
+![Schematic](images/RaspberryPresenceStatus_bb.png)
 
 ## Debugging on Raspberry Pi 3
 
