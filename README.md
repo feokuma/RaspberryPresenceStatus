@@ -2,6 +2,8 @@
 
 A led matrix display for online presence status. This is very usefull indicate when you are on a meeting.
 
+<img src="images/LedMatrixAvaliableStatus.jpg" alt="Led matrix showing avaliable status" style="width:200px;"/>
+
 ## Technologies
 
 -   .Net 5
