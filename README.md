@@ -68,7 +68,7 @@ The task `"deploy"` require the `rsync` tool on linux or `putty` on windows
             },
             "args": [
                 "publish",
-                "${workspaceFolder}/src/<ProjectName>.csproj",
+                "${workspaceFolder}/src/RasberryPresenceStatus.csproj",
                 "-r",
                 "linux-arm"
             ]
@@ -84,7 +84,7 @@ The task `"deploy"` require the `rsync` tool on linux or `putty` on windows
                     "-pw",
                     "raspberry",
                     "${workspaceFolder}/src/bin/Debug/net5.0/linux-arm/*.dll",
-                    "pi@10.10.10.10:/home/pi/<FolderOfDllsOnRPi>"
+                    "pi@192.168.0.28:/home/pi/presence"
                 ]
             },
             "linux": {
@@ -92,7 +92,7 @@ The task `"deploy"` require the `rsync` tool on linux or `putty` on windows
                 "args": [
                     "-cavzu",
                     "${workspaceFolder}/src/bin/Debug/net5.0/linux-arm/*",
-                    "pi@10.10.10.10:~/<FolderOfDllsOnRPi>"
+                    "pi@192.168.0.28:~/presence"
                 ]
             },
             "dependsOrder": "sequence",
@@ -114,8 +114,8 @@ The task `"deploy"` require the `rsync` tool on linux or `putty` on windows
             "request": "launch",
             "preLaunchTask": "deploy",
             "program": "~/.dotnet/dotnet",
-            "args": ["<ProjectName>.dll"],
-            "cwd": "~/<FolderOfDllsOnRPi>",
+            "args": ["RaspberryPresenceStatus.dll"],
+            "cwd": "~/presence",
             "stopAtEntry": false,
             "console": "internalConsole",
             "env": {

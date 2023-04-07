@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RaspberryPresenceStatus.Models;
 using RaspberryPresenceStatus.Services;
-using RaspberryPresenceStatus.SwaggerFilters;
 
 namespace RaspberryPresenceStatus
 {
@@ -29,7 +29,7 @@ namespace RaspberryPresenceStatus
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDisplayService displayService)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +52,9 @@ namespace RaspberryPresenceStatus
             {
                 endpoints.MapControllers();
             });
+
+            var imageBytes = MicrosoftTeamsStatusImages.StatusImageFromEnum(Models.Enuns.PresenceStatusEnum.Heart);
+            displayService.DrawBytes(imageBytes);
         }
     }
 }

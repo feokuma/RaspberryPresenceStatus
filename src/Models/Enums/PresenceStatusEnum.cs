@@ -28,6 +28,10 @@ namespace RaspberryPresenceStatus.Models.Enuns
         /// <summary>
         /// Offline
         /// </summary>
-        Offline
+        Offline,
+        /// <summary>
+        /// White Heart
+        /// </summary>
+        Heart
     }
 }

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaspberryPresenceStatus", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C0B581E1-D16D-4CED-A9A6-84FEE713921A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaspberryPresenceStatus.Unit", "test\RaspberryPresenceStatus.Unit\RaspberryPresenceStatus.Unit.csproj", "{7B8B91F2-B16D-40C0-9601-CF9A912C448B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaspberryPresenceStatus.Integration", "test\RaspberryPresenceStatus.Integration\RaspberryPresenceStatus.Integration.csproj", "{D0A83B22-9CB6-407C-8E87-1C23B0466377}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1D054E96-3649-4D80-B169-6E6191382170}"
@@ -65,8 +63,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3880A766-9223-4346-BA41-E3325527C7FA} = {1D054E96-3649-4D80-B169-6E6191382170}
-		{7B8B91F2-B16D-40C0-9601-CF9A912C448B} = {C0B581E1-D16D-4CED-A9A6-84FEE713921A}
-		{D0A83B22-9CB6-407C-8E87-1C23B0466377} = {C0B581E1-D16D-4CED-A9A6-84FEE713921A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3572BF9-6522-4D92-8310-52DE43C31ABF}

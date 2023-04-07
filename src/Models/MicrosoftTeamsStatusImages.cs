@@ -14,6 +14,7 @@ namespace RaspberryPresenceStatus.Models
         private static readonly Color AVALIABLE_COLOR = Color.FromArgb(0x00, 0x10, 0x00);
         private static readonly Color BUSY_COLOR = Color.FromArgb(0x10, 0x00, 0x00);
         private static readonly Color AWAY_COLOR = Color.FromArgb(0x10, 0x10, 0x00);
+        private static readonly Color HEART_COLOR = Color.FromArgb(0x01, 0x01, 0x01);
 
         public static byte[] StatusImageFromEnum(PresenceStatusEnum statusEnum)
         {
@@ -23,6 +24,7 @@ namespace RaspberryPresenceStatus.Models
                 PresenceStatusEnum.Away => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x6e, 0xef, 0xef, 0xef, 0xf7, 0x7e, 0x3c }, AWAY_COLOR),
                 PresenceStatusEnum.Busy => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xff, 0xff, 0xff, 0xff, 0x7e, 0x3c }, BUSY_COLOR),
                 PresenceStatusEnum.DoNotDisturb => ConvertBytesToBitmapImageRPi(new byte[] { 0x3c, 0x7e, 0xff, 0x81, 0x81, 0xff, 0x7e, 0x3c }, BUSY_COLOR),
+                PresenceStatusEnum.Heart => ConvertBytesToBitmapImageRPi(new byte[] { 0x66, 0xff, 0xff, 0xff, 0x7e, 0x3c, 0x18, 0x00 }, HEART_COLOR),
                 _ => ConvertBytesToBitmapImageRPi(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, Color.Black),
             };
         }
